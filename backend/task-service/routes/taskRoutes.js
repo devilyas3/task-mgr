@@ -1,11 +1,12 @@
-const express = require("express");
-const authenticateToken = require("../middleware/authMiddleware");
+const express = require('express');
+const authenticateToken = require('../middleware/authMiddleware');
 const {
     getAllTasks,
     addTask,
     editTask,
     removeTask
-} = require("../controllers/taskController");
+} = require('../controllers/taskController');
+
 const router = express.Router();
 
 router.get('/', authenticateToken, getAllTasks);

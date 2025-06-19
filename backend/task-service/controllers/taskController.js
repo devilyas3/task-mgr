@@ -5,7 +5,7 @@ const {
     deleteTask
 } = require("../models/taskModel");
 
-const getAllTasks = async (req, res) => {
+export const getAllTasks = async (req, res) => {
     try {
         const tasks = await getTaskByUser(req.user.id);
         res.json(tasks);
@@ -14,7 +14,7 @@ const getAllTasks = async (req, res) => {
     }
 };
 
-const addTask = async (req, res) => {
+export const addTask = async (req, res) => {
     const {title, description, status, deadline} = req.body;
     try {
         const task = await createTask(req.user.id, title, description, status, deadline);
@@ -24,7 +24,7 @@ const addTask = async (req, res) => {
     }
 };
 
-const editTask = async (req, res) => {
+export const editTask = async (req, res) => {
     const {title, description, status, deadline} = req.body;
     const {id} = req.params; 
     try {
@@ -35,7 +35,7 @@ const editTask = async (req, res) => {
     }
 };
 
-const removeTask = async (req, res) => {
+export const removeTask = async (req, res) => {
     const {id} = req.params; 
     try {
         await deleteTask(id);
@@ -43,11 +43,4 @@ const removeTask = async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: "Error deleting task", error: err.message });
     }
-};
-
-module.exports = {
-    getAllTasks,
-    addTask,
-    editTask,
-    removeTask,
 };

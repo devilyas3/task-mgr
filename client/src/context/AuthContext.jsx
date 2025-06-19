@@ -13,13 +13,11 @@ export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const isAuthPage = ['login', '/register'].includes(location.pathname);
+        const isAuthPage = ['/login', '/register'].includes(location.pathname);
 
         if (token && isAuthPage) {
             navigate('/dashboard');
-        } else if (!token && location.pathname !== '/login' && location.pathname !== '/register') {
-            navigate('/login');
-        }
+        } 
     }, [token, location.pathname]);
 
     const login = async (email, password) => {
@@ -81,7 +79,7 @@ export const AuthProvider = ({children}) => {
     };
 
     return (
-        <AuthContext.Provider value={{ token, login, register, logout }}>
+        <AuthContext.Provider value={{ token, user, login, register, logout }}>
             {children}
         </AuthContext.Provider>
     );
